@@ -18,6 +18,9 @@ function waitForElement(selector) {
     });
 }
 
+const root = document.querySelector(':root');
+root.style.setProperty('--header-height', '0');
+
 const banner = document.querySelector('div[role="banner"]');
 banner.style.display = 'none';
 
