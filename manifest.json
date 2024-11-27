@@ -1,12 +1,13 @@
 {
     "manifest_version": 2,
     "name": "Facebook Distraction Disabler",
-    "version": "1.0",
+    "version": "1.1",
   
     "description": "Removes the possibility of distracting yourself with browsing Facebook - only messages allowed.",
   
     "icons": {
-      "48": "icons/border-48.png"
+      "48": "icons/icon.svg",
+      "96": "icons/icon.svg"
     },
   
     "content_scripts": [
