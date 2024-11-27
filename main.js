@@ -5,7 +5,7 @@ function waitForElement(selector) {
             return resolve(document.querySelector(selector));
         }
 
-        const observer = new MutationObserver(mutations => {
+        const observer = new MutationObserver(_mutations => {
             if (document.querySelector(selector)) {
                 observer.disconnect();
                 resolve(document.querySelector(selector));
@@ -18,17 +18,35 @@ function waitForElement(selector) {
     });
 }
 
-const root = document.querySelector(':root');
-root.style.setProperty('--header-height', '0');
+const style = document.createElement('style');
 
-const banner = document.querySelector('div[role="banner"]');
-banner.style.display = 'none';
+// https://stackoverflow.com/questions/51050533/injecting-css-like-html-through-javascript-into-the-dom
+style.appendChild(document.createTextNode(`
+    :root, .__fb-dark-mode {
+        --header-height: 0;
+        }
 
-const notificationButton = document.querySelector('a[href="/notifications/"]').parentElement;
+    @media (prefers-color-scheme: dark) {
+        :root, .__fb-dark-mode {
+            --header-height: 0;
+        }
 
-waitForElement('div[aria-label="Settings, help and more"').then((element) => {
-    const chatMenu = element.parentElement.parentElement;
+    div[role="banner"] {
+        display: none;
+    }
+  `
+));
 
-    chatMenu.appendChild(notificationButton);
-    notificationButton.style.marginLeft = '8px';
+const head = document.getElementsByTagName('head')[0];
+head.appendChild(style);
+
+waitForElement('a[href="/notifications/"]').then(element => {
+    const notificationButton = element.parentElement;
+
+    waitForElement('div[aria-label="Settings, help and more"').then((element) => {
+        const chatMenu = element.parentElement.parentElement;
+
+        chatMenu.appendChild(notificationButton);
+        notificationButton.style.marginLeft = '8px';
+    });
 });

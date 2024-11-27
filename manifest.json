@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
-    "name": "Borderify",
+    "name": "Facebook Distraction Disabler",
     "version": "1.0",
   
-    "description": "Adds a red border to all webpages matching mozilla.org.",
+    "description": "Removes the possibility of distracting yourself with browsing Facebook - only messages allowed.",
   
     "icons": {
       "48": "icons/border-48.png"
