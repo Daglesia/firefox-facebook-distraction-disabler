@@ -34,19 +34,31 @@ style.appendChild(document.createTextNode(`
     div[role="banner"] {
         display: none;
     }
+
+    div[aria-label="Notifications"][role="dialog"] {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background-color: red;
+    }
   `
 ));
 
 const head = document.getElementsByTagName('head')[0];
 head.appendChild(style);
 
-waitForElement('a[href="/notifications/"]').then(element => {
+waitForElement('div[aria-label="Notifications"]').then(element => {
     const notificationButton = element.parentElement;
 
-    waitForElement('div[aria-label="Settings, help and more"').then((element) => {
+    waitForElement('div[aria-label="Settings, help and more"]').then((element) => {
         const chatMenu = element.parentElement.parentElement;
 
         chatMenu.appendChild(notificationButton);
         notificationButton.style.marginLeft = '8px';
+        
+        waitForElement('div[aria-label="Notifications"][role="dialog"]').then((dialogWindow) => {
+            const body = document.getElementsByTagName('body')[0];
+            body.appendChild(dialogWindow);
+        });
     });
 });

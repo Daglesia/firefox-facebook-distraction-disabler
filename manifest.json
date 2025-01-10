@@ -3,7 +3,7 @@
     "name": "Facebook Distraction Disabler",
     "version": "1.1",
   
-    "description": "Removes the possibility of distracting yourself with browsing Facebook - only messages allowed.",
+    "description": "Removes the possibility of distracting yourself with browsing Facebook website - only messages allowed.",
   
     "icons": {
       "48": "icons/icon.svg",
